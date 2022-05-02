@@ -1,0 +1,53 @@
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Web.Common
+
+@model IPagedList<CoreLibrary.Models.Book>
+@{
+    ViewData["Title"] = "Index";
+}
+<style>
+</style>
+
+<h1>Book List</h1>
+<table class="table table-bordered">
+    <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Stock</th>
+        <th>Publisher</th>
+        <th>Writer</th>
+        <th>Status</th>
+        <th>Actions</th>
+    </tr>
+    @{
+        int sNumber = 0;
+    }
+    @foreach (var item in Model)
+    {
+        sNumber++;
+        <tr>
+            <td>@sNumber</td>
+            <td>@item.Name</td>
+            <td>@item.Stock</td>
+            <td><a href="/Publisher/PublisherBooks/@item.Publisher.PublisherId">@item.Publisher.Name</a></td>
+            <td><a href="/Writer/WriterBooks/@item.Writer.WriterId">@item.Writer.Name</a></td>
+            <td>@item.Status</td>
+            <td>
+                <a href="/Book/BookRemove/@item.Id" class="btn btn-sm btn-danger">Status Change</a>
+                <a href="/Book/BookUpdate/@item.Id" class="btn btn-sm btn-warning">Update</a>
+                <a href="/Book/BookDetail/@item.Id" class="btn btn-sm btn-primary">Details</a>
+            </td>
+        </tr>
+    }
+</table>
+@Html.PagedListPager((IPagedList)Model,page => Url.Action("Index", 
+        new { Page = page }),
+        new PagedListRenderOptions {
+            LiElementClasses = new string[] { "page-item" },
+            PageClasses = new string[] { "page-link" }
+    })
+<br />
+
+<a href="/Book/BookAdd/" class="btn btn-primary">New Book</a>
+

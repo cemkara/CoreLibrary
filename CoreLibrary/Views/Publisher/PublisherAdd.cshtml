@@ -1,0 +1,16 @@
+﻿@using CoreLibrary.Models
+@model Publisher
+@{
+    ViewData["Title"] = "PublisherAdd";
+}
+
+<h1>New Publisher</h1>
+@using (Html.BeginForm("PublisherAdd", "Publisher", FormMethod.Post))
+{
+    @Html.Label("Name")
+    @Html.TextBoxFor(x=>x.Name,new {@class="form-control"})
+    @Html.ValidationMessageFor(x=>x.Name,"",new{@style="color:red"})
+    <br />
+    <button class="btn btn-primary" type="submit">Add</button>
+}
+

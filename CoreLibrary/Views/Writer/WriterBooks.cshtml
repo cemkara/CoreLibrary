@@ -1,0 +1,32 @@
+﻿@using CoreLibrary.Models
+@model List<Book>
+@{
+    ViewData["Title"] = "WriterBooks";
+}
+
+<h1>Publisher Books</h1>
+<table class="table table-bordered">
+    <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Publisher</th>
+        <th>Actions</th>
+    </tr>
+    @{
+        int sNumber = 0;
+    }
+    @foreach (var item in Model)
+    {
+        sNumber++;
+        <tr>
+            <td>@sNumber</td>
+            <td>@item.Name</td>
+            <td><a href="/Publisher/PublisherBooks/@item.Publisher.PublisherId">@item.Publisher.Name</a></td>
+
+            <td>
+                <a href="/Book/BookDetail/@item.Id" class="btn btn-sm btn-primary">Detail</a>
+            </td>
+        </tr>
+    }
+</table>
+

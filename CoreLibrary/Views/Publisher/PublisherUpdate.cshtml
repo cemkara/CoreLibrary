@@ -1,0 +1,19 @@
+﻿@using CoreLibrary.Models
+@model Publisher
+@{
+    ViewData["Title"] = "PublisherUpdate";
+}
+
+<h1>Publisher Update</h1>
+@using (Html.BeginForm("PublisherUpdate", "Publisher", FormMethod.Post))
+{
+    @Html.HiddenFor(x=>x.PublisherId)
+    @Html.Label("Name")
+    @Html.TextBoxFor(x=>x.Name,new {@class="form-control"})
+    @Html.ValidationMessageFor(x=>x.Name,"",new{@style="color:red"})
+    <br />
+    <button class="btn btn-primary" type="submit">Add</button>
+}
+
+
+
